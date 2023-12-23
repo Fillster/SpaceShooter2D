@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8cp1iekafdru"]
+
+[ext_resource type="Script" path="res://projectiles/laser.gd" id="1_g616t"]
+[ext_resource type="Texture2D" uid="uid://b6h71mnj4sr23" path="res://galaxy_defiance_resources/assets/laser_small.png" id="1_te8ha"]
+[ext_resource type="Script" path="res://galaxy_defiance_resources/components/move_component.gd" id="2_bgomn"]
+[ext_resource type="Script" path="res://galaxy_defiance_resources/components/scale_component.gd" id="4_uvlxd"]
+
+[node name="Laser" type="Node2D"]
+script = ExtResource("1_g616t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_te8ha")
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("2_bgomn")
+actor = NodePath("..")
+velocity = Vector2(0, -200)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(0.2, 0.4)
+
+[node name="ScaleComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("4_uvlxd")
+sprite = NodePath("../Sprite2D")
+scale_amount = Vector2(2, 2)
+scale_duration = 1.0
